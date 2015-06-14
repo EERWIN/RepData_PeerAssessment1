@@ -12,16 +12,8 @@ activity <- read.csv("activity.csv", colClasses = c("numeric", "character",
     "numeric"))
 head(activity)
 
-## steps    date         interval
-## 1    NA 2012-10-01        0
-## 2    NA 2012-10-01        5
-## 3    NA 2012-10-01       10
-## 4    NA 2012-10-01       15
-## 5    NA 2012-10-01       20
-## 6    NA 2012-10-01       25
 names(activity)
 
-## [1] "steps"    "date"     "interval"
 library(lattice)
 activity$date <- as.Date(activity$date, "%Y-%m-%d")
 
@@ -34,9 +26,8 @@ StepsTotal <- aggregate(steps ~ date, data = activity, sum, na.rm = TRUE)
 hist(StepsTotal$steps, main = "Total steps by day", xlab = "day", col = "red")
 
 mean(StepsTotal$steps)
-## [1] 10766
 median(StepsTotal$steps)
-## [1] 10765
+
 
 
 
@@ -52,16 +43,13 @@ plot(row.names(time_series), time_series, type = "l", xlab = "5-min interval",
     col = "red")
 max_interval <- which.max(time_series)
 names(max_interval)
-## [1] "835"
-
-
 
 
 ## Imputing missing values
 
 activity_NA <- sum(is.na(activity))
 activity_NA
-## [1] 2304
+
 
 StepsAverage <- aggregate(steps ~ interval, data = activity, FUN = mean)
 fillNA <- numeric()
@@ -83,9 +71,7 @@ StepsTotal2 <- aggregate(steps ~ date, data = new_activity, sum, na.rm = TRUE)
 hist(StepsTotal2$steps, main = "Total steps by day", xlab = "day", col = "red")
 
 mean(StepsTotal2$steps)
-## [1] 10766
 median(StepsTotal2$steps)
-## [1] 10766
 
 
 
